@@ -44,5 +44,5 @@ export async function getClientAffinityByEpoch(startEpoch: number, endEpoch?: nu
 export async function getLastEpochClientAffinity(): Promise<ClientAffinity>{
     const lastSyncSlot: number = await getClientAffinityLastSlot();
     const lastSyncEpoch: number = await getEpochBySlot(lastSyncSlot);
-    return await getEpochBySlot(lastSyncEpoch);
+    return await getClientAffinityByEpoch(lastSyncEpoch);
 }
