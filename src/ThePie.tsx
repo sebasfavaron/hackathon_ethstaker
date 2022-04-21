@@ -15,5 +15,5 @@ export const ThePie: FC<ThePieProps> = ({epoch}) => {
             labels: ["Uncertain", "Lighthouse", "Lodestar", "Nimbus", "Prysm", "Teku", "Other"],
             type: "pie",
         },
-    ]} layout={{height: 400, width: 500, title: '🥧 Pie chart'}} />
+    ]} layout={{height: 400, width: 500, title: `Last Epoch (${epoch.epoch})`}} />
 }
