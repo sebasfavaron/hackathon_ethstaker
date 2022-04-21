@@ -16,7 +16,7 @@ async function getClientAffinityLastSlot(): Promise<number> {
     return res.data.greatest_block_slot;
 }
 
-async function getEpochBySlot(slotId: number): Promise<number> {
+async function fetchEpochBySlot(slotId: number): Promise<number> {
     const res = await axios.get(BEACONCHAIN_API + '/block/' + slotId,
         {headers: {accept: 'application/json'}});
     if (res.status !== 200) {
@@ -29,7 +29,7 @@ async function getEpochBySlot(slotId: number): Promise<number> {
     return res.data.data.epoch;
 }
 
-export async function getClientAffinityByEpoch(startEpoch: number, endEpoch?: number): Promise<ClientAffinity> {
+async function fetchClientAffinityByEpoch(startEpoch: number, endEpoch?: number): Promise<ClientAffinity> {
     let path = `/blocks_per_client/${startEpoch}`;
     if (endEpoch) {
         path = `/blocks_per_client/${startEpoch}/${endEpoch}`
@@ -46,15 +46,15 @@ export async function getClientAffinityByEpoch(startEpoch: number, endEpoch?: nu
 
 export async function getLastEpochNumber(): Promise<number> {
     const lastSyncSlot: number = await getClientAffinityLastSlot();
-    return await getEpochBySlot(lastSyncSlot);
+    return await fetchEpochBySlot(lastSyncSlot);
 }
 
-export async function getLastEpochClientAffinity(): Promise<ClientAffinity> {
-    return await getClientAffinityByEpoch(await getLastEpochNumber());
+export async function getClientAffinityEpoch(epochNumber: number): Promise<Epoch>{
+    const affinity = await fetchClientAffinityByEpoch(epochNumber);
+    return {epoch: epochNumber, clientAffinity: affinity};
 }
 
 export async function getLastEpoch(): Promise<Epoch> {
     const epochNumber = await getLastEpochNumber();
-    const affinity = await getClientAffinityByEpoch(epochNumber);
-    return {epoch: epochNumber, clientAffinity: affinity};
+    return getClientAffinityEpoch(epochNumber);
 }
