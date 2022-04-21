@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Plot from 'react-plotly.js';
 
@@ -16,7 +15,14 @@ function App() {
           labels: ["Blue", "Red", "Yellow", "Orange"],
           type: "pie",
         },
-      ]} layout={{height: 400, width: 500}} />
+      ]} layout={{height: 400, width: 500, title: '🥧 Pie chart'}} />
+      <Plot data={[
+        {
+          x: [1, 2, 3, 4],
+          y: [10, 15, 13, 17],
+          mode: 'markers'
+        }
+      ]} layout={{title: 'Line chart'}} />
     </div>
   );
 }
