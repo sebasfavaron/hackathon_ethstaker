@@ -17,11 +17,12 @@ async function getClientAffinityLastSlot(): Promise<number> {
 }
 
 async function getEpochBySlot(slotId: number): Promise<number> {
-    const res = await axios.get(BEACONCHAIN_API + '/block/',
+    const res = await axios.get(BEACONCHAIN_API + '/block/' + slotId,
         {headers: {accept: 'application/json'}});
     if (res.status !== 200) {
         throw new Error(`Error response code ${res.status} ${res.statusText}`);
     }
+    console.log(res.data)
     if (!(res.data && res.data.epoch)) {
         throw new Error("Error no data");
     }
