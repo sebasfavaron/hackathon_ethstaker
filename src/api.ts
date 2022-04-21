@@ -1,8 +1,8 @@
 import axios from "axios";
 import {ClientAffinity, Epoch} from "./types";
 
-const BLOCKPRINT_API = 'https://api.blockprint.sigp.io';
-const BEACONCHAIN_API = 'https://beaconcha.in/api/v1';
+const BLOCKPRINT_API = 'https://locahost:4000';
+const BEACONCHAIN_API = 'https://locahost:4000/api/v1';
 
 async function getClientAffinityLastSlot(): Promise<number> {
     const res = await axios.get(BLOCKPRINT_API + '/sync/status',
@@ -33,7 +33,7 @@ export async function getClientAffinityByEpoch(startEpoch: number, endEpoch?: nu
     if (endEpoch) {
         path = `/blocks_per_client/${startEpoch}/${endEpoch}`
     }
-    const res = await axios.get(BLOCKPRINT_API + '/block/');
+    const res = await axios.get(BLOCKPRINT_API + path);
     if (res.status !== 200) {
         throw new Error(`Error response code ${res.status} ${res.statusText}`);
     }
