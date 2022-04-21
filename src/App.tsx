@@ -8,6 +8,15 @@ import {getLastEpoch} from "./api";
 function App() {
     const [epochs, setEpochs] = useState<Epoch[]>([]);
 
+    const fetchEpochs = async () => {
+        const _epochs = await getLastEpoch();
+        setEpochs([_epochs]);
+    };
+
+    useState(() => {
+        fetchEpochs().finally();
+    });
+
     return (
         <div className="App">
             <header className="App-header header">
