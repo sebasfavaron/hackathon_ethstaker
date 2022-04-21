@@ -7,3 +7,8 @@ export type ClientAffinity = {
     "Prysm": number; 
     "Teku": number;
 };
+
+export type Epoch = {
+    epoch: number;
+    clientAffinity: ClientAffinity;
+}
