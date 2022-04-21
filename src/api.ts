@@ -23,10 +23,10 @@ async function getEpochBySlot(slotId: number): Promise<number> {
         throw new Error(`Error response code ${res.status} ${res.statusText}`);
     }
     console.log(res.data)
-    if (!(res.data && res.data.epoch)) {
+    if (!(res.data && res.data.data && res.data.data.epoch)) {
         throw new Error("Error no data");
     }
-    return res.data.epoch;
+    return res.data.data.epoch;
 }
 
 export async function getClientAffinityByEpoch(startEpoch: number, endEpoch?: number): Promise<ClientAffinity> {
