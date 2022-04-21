@@ -4,6 +4,7 @@ import Plot from 'react-plotly.js';
 import {TheTable} from "./TheTable";
 import {Epoch} from "./types";
 import {getLastEpoch} from "./api";
+import {ThePie} from "./ThePie";
 
 function App() {
     const [epochs, setEpochs] = useState<Epoch[]>([]);
@@ -22,13 +23,7 @@ function App() {
             <header className="App-header header">
                 <h1>Clientversity</h1>
             </header>
-            <Plot data={[
-                {
-                    values: [112, 454, 65, 544],
-                    labels: ["Blue", "Red", "Yellow", "Orange"],
-                    type: "pie",
-                },
-            ]} layout={{height: 400, width: 500, title: '🥧 Pie chart'}}/>
+            <ThePie epoch={epochs[0]} />
             <Plot data={[
                 {
                     x: [1, 2, 3, 4],
