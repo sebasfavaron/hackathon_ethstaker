@@ -6,8 +6,8 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-
+      <header className="App-header header">
+      <h1>Clientversity</h1>
       </header>
       <Plot data={[
         {
