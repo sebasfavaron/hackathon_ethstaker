@@ -1,8 +1,8 @@
 import axios from "axios";
 import {ClientAffinity, Epoch} from "./types";
 
-const BLOCKPRINT_API = 'https://locahost:4000';
-const BEACONCHAIN_API = 'https://locahost:4000/api/v1';
+const BLOCKPRINT_API = 'http://localhost:4000';
+const BEACONCHAIN_API = 'http://localhost:4000/api/v1';
 
 async function getClientAffinityLastSlot(): Promise<number> {
     const res = await axios.get(BLOCKPRINT_API + '/sync/status',
